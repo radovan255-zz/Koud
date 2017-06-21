@@ -111,18 +111,15 @@ public class MainActivity extends AppCompatActivity {
         buttonHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                /*
-                new GetHistoryCodes().execute();
-
-                Intent secondIntent = new Intent(MainActivity.this, ListViewActivity.class);
-                startActivity(secondIntent);
-                */
+            launchActivity();
             }
         });
-
     }
 
+    private void launchActivity(){
+        Intent intent = new Intent(this, HistoryActivity.class);
+        startActivity(intent);
+    }
 
     private void CheckOrSetPermisson() {
         boolean permissionGranted = ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
@@ -149,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
                     textViewLatitude.setText("Latitude is: " + latitude);
                     textViewLongitude.setText("Longitude is: " + longitude);
                     textViewTime.setText("Time is: " + time);
+                    textViewStatus.setText("Status");
 
                 } catch (Exception ex) {
                     Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
