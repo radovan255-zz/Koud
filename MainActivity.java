@@ -25,18 +25,18 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static String result = "";
-    private static String text = "";
+    private String result = "";
+    private String text = "";
 
+    public static String name, gender, age, code, imei, time, store;
 
-    private Button buttonScan, buttonSend, buttonHistory;
-    private TextView textViewCode, textViewStatus, textViewLatitude, textViewLongitude, textViewTime;
+    private Button buttonScan, buttonSend, buttonHistory, buttonAllInfo;
+    static TextView textViewCode, textViewStatus, textViewImei, textViewLongiName, textViewTime, textViewAge, textViewStore;
     private IntentIntegrator qrScan;
     private GPSTracker gps;
     private Calendar calendar;
-    private String code, time;
     private Double latitude, longitude;
-    private String s;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +46,11 @@ public class MainActivity extends AppCompatActivity {
         buttonScan = (Button) findViewById(R.id.buttonScan);
         buttonSend = (Button) findViewById(R.id.buttonSend);
         buttonHistory = (Button) findViewById(R.id.buttonHistory);
+        buttonAllInfo = (Button) findViewById(R.id.buttonAllInfo);
         textViewCode = (TextView) findViewById(R.id.textViewCode);
         textViewStatus = (TextView) findViewById(R.id.textViewStatus);
-        textViewLatitude = (TextView) findViewById(R.id.textViewLatitude);
-        textViewLongitude = (TextView) findViewById(R.id.textViewLongitude);
         textViewTime = (TextView) findViewById(R.id.textViewTime);
+
 
         /*
         TelephonyManager mngr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
@@ -111,13 +111,25 @@ public class MainActivity extends AppCompatActivity {
         buttonHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            launchActivity();
+            launchActivityHistory();
+            }
+        });
+
+        buttonAllInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                launchActivityAllInfo();
             }
         });
     }
 
-    private void launchActivity(){
+    private void launchActivityHistory(){
         Intent intent = new Intent(this, HistoryActivity.class);
+        startActivity(intent);
+    }
+
+    private void launchActivityAllInfo(){
+        Intent intent = new Intent(this, AllInfoActivity.class);
         startActivity(intent);
     }
 
@@ -143,8 +155,6 @@ public class MainActivity extends AppCompatActivity {
 
                     code = result.getContents();
                     textViewCode.setText("Scanned code: " + result.getContents());
-                    textViewLatitude.setText("Latitude is: " + latitude);
-                    textViewLongitude.setText("Longitude is: " + longitude);
                     textViewTime.setText("Time is: " + time);
                     textViewStatus.setText("Status");
 
