@@ -11,10 +11,6 @@ public class SplashScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-
-        EditText editText = (EditText) findViewById(R.id.editText2);
-        editText.setKeyListener(null);
-
         Thread myThread = new Thread(){
             @Override
             public void run(){

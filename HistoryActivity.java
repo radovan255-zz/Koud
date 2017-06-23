@@ -14,24 +14,24 @@ public class HistoryActivity extends AppCompatActivity {
 
     private ListView historyListView;
 
-    ArrayAdapter<String> adapter;
-
-    ArrayList<HashMap<String, String>> productList;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
-
-        String products[] = {"Code1", "Code1", "Code1", "Code1", "Code1"};
-
         historyListView = (ListView) findViewById(R.id.listViewHistory);
-        adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.product_name, products);
+        final ArrayList<CodeToVerify> codeList = CodeToVerify.getRecipesFromFile("recipes.json", this);
+
+        CodesAdapter adapter = new CodesAdapter(this, codeList);
         historyListView.setAdapter(adapter);
+        String[] listItems = new String[codeList.size()];
 
 
 
+        for(int i = 0; i < codeList.size(); i++){
+            CodeToVerify codeToVerify = codeList.get(i);
+            listItems[i] = codeToVerify.codeNumber;
+        }
 
     }
 }
